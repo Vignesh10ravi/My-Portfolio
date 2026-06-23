@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Vignesh Ravi - Portfolio</title>
+<title>Vignesh Ravi</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
@@ -49,6 +49,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   width:340px;height:340px;
   border-radius:50%;
   position:relative;flex-shrink:0;
+  overflow:hidden;
 }
 .hero-photo-frame::before{
   content:'';position:absolute;inset:-4px;
@@ -62,14 +63,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   border-radius:50%;background:var(--bg);z-index:1;
 }
 .hero-photo-frame img{
-  position:absolute;inset:8px;
-  width:calc(100% - 16px);height:calc(100% - 16px);
+  position:absolute;
+  inset:4px; /* Ensure no white space from the after element */
+  width: 110%; /* Increase width to scale image */
+  height: 110%; /* Increase height to scale image */
+  left: -5%; /* Shift left to center the larger image */
+  top: -5%; /* Shift top to center the larger image */
   border-radius:50%;
-  object-fit:contain; /* Fully zoomed out to show the entire face/head */
-  object-position:center; /* Centered perfectly */
-  background-color:var(--bg); /* Blends any empty space perfectly into the frame */
+  object-fit:cover; /* Scale to fill without distortion */
+  object-position:center;
   z-index:2;display:block;
 }
+
 @media(max-width:900px){
   .hero-inner{grid-template-columns:1fr;text-align:center;gap:2.5rem;padding:80px 5vw 40px;}
   .hero-text{text-align:center;order:2}
@@ -80,7 +85,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   .hero h1{font-size:clamp(1.8rem,6vw,2.6rem)}
 }
 
-.hero-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);border-radius:50px;padding:8px 16px;font-size:.73rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem;animation:fadeUp .8s ease both}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);border-radius:50px;padding:8px 16px;font-size:.73rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--a);margin-bottom:2rem;animation:fadeUp .8s ease both}
 .hero-chip::before{content:'';width:6px;height:6px;background:var(--a);border-radius:50%;animation:blink 2s ease infinite}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
 .hero h1{
@@ -90,7 +95,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   margin-bottom:.6rem;animation:fadeUp .8s .15s ease both;
   white-space:nowrap;overflow:hidden;
 }
-.grad{background:linear-gradient(135deg,var(--a) 0%,var(--b) 50%,var(--c) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% auto;animation:gradS 4s ease infinite}
+.grad{background:linear-gradient(135deg,var(--a) 0%,var(--b) 50%,var(--c) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% auto;animation:gradS 5s ease infinite}
 @keyframes gradS{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 
 /* Interactive hero summary */
@@ -165,7 +170,7 @@ section{padding:100px 4vw;position:relative;z-index:1}
 .blist li{font-size:.87rem;color:var(--text);padding-left:1.4rem;position:relative;line-height:1.7}
 .blist li::before{content:'⌂';position:absolute;left:.2rem;color:var(--a);font-size:.6rem;opacity:.8}
 
-/* ── MODAL LIGHTBOX ── */
+/* ── MODAL ── */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(12px)}
 .modal-bg.open{display:flex}
 .modal-box{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:2rem;max-width:900px;width:94vw;max-height:90vh;overflow:auto;position:relative;backdrop-filter:blur(20px)}
@@ -174,7 +179,7 @@ section{padding:100px 4vw;position:relative;z-index:1}
 .modal-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;margin-bottom:1rem;padding-right:2rem;letter-spacing:-.01em}
 .modal-img{width:100%;border-radius:10px;display:block}
 
-/* ── PROJECTS ── */
+/* ── PROJECTS & MISC CARDS ── */
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:1.4rem}
 .p-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;transition:.3s;position:relative;overflow:hidden;cursor:default;display:flex;flex-direction:column;backdrop-filter:blur(10px)}
 .p-card::before{content:'';position:absolute;top:-50px;right:-50px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.05),transparent 70%);transition:.4s;pointer-events:none}
@@ -184,7 +189,7 @@ section{padding:100px 4vw;position:relative;z-index:1}
 .p-badge{display:inline-block;font-size:.68rem;font-weight:700;padding:4px 12px;border-radius:50px;letter-spacing:.05em;margin-bottom:.8rem}
 .p-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.96rem;color:#fff;margin-bottom:1rem;line-height:1.5;letter-spacing:-.01em}
 .p-result{margin-top:auto;padding:.75rem 1rem;background:rgba(0,255,179,.06);border:1px solid rgba(0,255,179,.15);border-radius:10px;font-size:.78rem;color:var(--c);font-weight:600;display:flex;align-items:center;gap:8px;margin-top:1rem}
-.p-result::before{content:'✦';font-size:.7rem}
+.p-result::before{content:'⚡';font-size:.7rem}
 
 /* ── SKILLS ── */
 .skill-section-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
@@ -203,7 +208,7 @@ section{padding:100px 4vw;position:relative;z-index:1}
 .cert-pill{display:flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;padding:7px 15px;border-radius:50px;background:rgba(123,97,255,.08);color:var(--b);border:1px solid rgba(123,97,255,.18);transition:.25s;letter-spacing:.01em;cursor:pointer;}
 .cert-pill:hover{background:rgba(123,97,255,.15);transform:translateY(-2px)}
 
-/* ── EDUCATION ── */
+/* ── OTHER SECTIONS ── */
 .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:1.4rem}
 .e-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;transition:.3s;position:relative;backdrop-filter:blur(10px)}
 .e-card:hover{border-color:rgba(123,97,255,.3);transform:translateY(-4px)}
@@ -212,23 +217,29 @@ section{padding:100px 4vw;position:relative;z-index:1}
 .e-focus{font-size:.81rem;color:var(--a);margin-bottom:.5rem;font-weight:500}
 .e-school{font-size:.84rem;color:var(--muted);margin-bottom:.5rem}
 .e-date{font-size:.71rem;color:var(--muted);font-weight:600;letter-spacing:.01em}
+.award-card, .tr-card, .c-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem 1.8rem;transition:.3s;backdrop-filter:blur(10px)}
+.tr-card{display:flex;justify-content:space-between;align-items:flex-start;gap:1.2rem;}
+.tr-card:hover{border-color:rgba(0,255,179,.15);transform:translateX(4px)}
+.c-card{display:flex;align-items:center;gap:16px;text-decoration:none;position:relative;overflow:hidden}
+.c-card:hover{border-color:rgba(0,212,255,.15);transform:translateY(-3px)}
+.c-icon{width:48px;height:48px;border-radius:11px;background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(123,97,255,.1));display:flex;align-items:center;justify-content:center;color:var(--a);font-size:1rem;flex-shrink:0}
 
-/* ── PUBLICATIONS ── */
-.pub-list{display:flex;flex-direction:column;gap:1rem}
-.pub-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.35rem 1.6rem;display:flex;gap:1.1rem;align-items:flex-start;transition:.3s}
-.pub-card:hover{border-color:rgba(0,212,255,.2);transform:translateX(4px)}
-.pub-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;margin-top:.15rem}
-.pub-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;color:#fff;margin-bottom:.3rem;line-height:1.35}
-.pub-meta{font-size:.78rem;color:var(--muted);line-height:1.5}
-.pub-footer{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-top:.6rem}
-.pub-year{font-size:.7rem;font-weight:700;background:rgba(0,212,255,.08);color:var(--a);border:1px solid rgba(0,212,255,.2);padding:2px 9px;border-radius:50px;white-space:nowrap}
+/* AWARDS & TRAININGS SPECIFIC */
+.awards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.85rem}
+.award-card:hover{border-color:rgba(255,209,102,.25);transform:translateY(-3px)}
+.award-icon{font-size:1.2rem;flex-shrink:0;padding-top:.1rem}
+.award-title{font-size:.88rem;font-weight:600;color:#fff;line-height:1.35}
+.award-sub{font-size:.78rem;color:var(--muted);margin-top:.3rem}
+.award-year{font-size:.7rem;font-weight:700;color:var(--gold);margin-top:.4rem}
+.training-list{display:flex;flex-direction:column;gap:.9rem}
+.tr-title{font-size:.88rem;font-weight:600;color:#fff;line-height:1.35}
+.tr-org{font-size:.78rem;color:var(--muted);margin-top:.3rem}
+.tr-date{font-size:.72rem;font-weight:700;color:var(--c);white-space:nowrap;padding-top:.15rem;flex-shrink:0}
 .pub-link{display:inline-flex;align-items:center;gap:5px;font-size:.73rem;font-weight:600;padding:4px 12px;border-radius:50px;text-decoration:none;transition:.25s;border:1px solid rgba(0,212,255,.2);color:var(--a);background:rgba(0,212,255,.06);cursor:pointer}
 .pub-link:hover{background:rgba(0,212,255,.14);border-color:rgba(0,212,255,.5)}
-
-/* ── CONFERENCES ── */
 .conf-list{display:flex;flex-direction:column;gap:1rem}
 .conf-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.35rem 1.6rem;display:flex;gap:1.1rem;align-items:flex-start;transition:.3s;position:relative;overflow:hidden}
-.conf-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(var(--b),var(--c));border-radius:2px}
+.conf-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(var(--a),var(--b));border-radius:2px}
 .conf-card:hover{border-color:rgba(123,97,255,.25);transform:translateX(4px)}
 .conf-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;margin-top:.15rem}
 .conf-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;color:#fff;margin-bottom:.3rem;line-height:1.35}
@@ -237,57 +248,28 @@ section{padding:100px 4vw;position:relative;z-index:1}
 .conf-year{font-size:.7rem;font-weight:700;background:rgba(123,97,255,.1);color:var(--b);border:1px solid rgba(123,97,255,.2);padding:2px 9px;border-radius:50px;white-space:nowrap}
 .conf-badge{font-size:.7rem;font-weight:700;background:rgba(0,255,179,.07);color:var(--c);border:1px solid rgba(0,255,179,.2);padding:2px 9px;border-radius:50px}
 
-/* ── AWARDS ── */
-.awards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.85rem}
-.award-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.35rem;display:flex;align-items:flex-start;gap:.85rem;transition:.3s}
-.award-card:hover{border-color:rgba(255,209,102,.2);transform:translateY(-2px)}
-.award-icon{font-size:1.1rem;flex-shrink:0;padding-top:.1rem}
-.award-title{font-size:.84rem;font-weight:600;color:var(--text);line-height:1.35}
-.award-sub{font-size:.74rem;color:var(--muted);margin-top:.2rem}
-.award-year{font-size:.68rem;font-weight:700;color:var(--gold);margin-top:.3rem}
-
-/* ── TRAININGS ── */
-.training-list{display:flex;flex-direction:column;gap:.8rem}
-.tr-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.4rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;transition:.3s}
-.tr-card:hover{border-color:rgba(0,255,179,.2);transform:translateX(4px)}
-.tr-title{font-size:.85rem;font-weight:600;color:var(--text);line-height:1.35}
-.tr-org{font-size:.76rem;color:var(--muted);margin-top:.2rem}
-.tr-date{font-size:.71rem;font-weight:700;color:var(--c);white-space:nowrap;padding-top:.15rem;flex-shrink:0}
-
 /* ── LANG SPOKEN ── */
-.lang-spoken{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:1.75rem}
-.lp{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:9px 18px;transition:.25s}
+.lang-spoken{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem}
+.lp{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:10px 18px;transition:.25s}
 .lp:hover{border-color:var(--a);transform:translateY(-2px)}
 .lp-flag{font-size:1.2rem}
-.lp-name{font-size:.85rem;font-weight:500}
-.lp-lvl{font-size:.68rem;font-weight:700;background:rgba(0,212,255,.1);color:var(--a);border:1px solid rgba(0,212,255,.2);padding:2px 8px;border-radius:50px}
+.lp-name{font-size:.85rem;font-weight:600}
+.lp-lvl{font-size:.68rem;font-weight:700;background:rgba(0,212,255,.1);color:var(--a);border:1px solid rgba(0,212,255,.15);padding:2px 9px;border-radius:50px;letter-spacing:.01em}
 
-/* ── CONTACT ── */
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
-.c-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem 1.65rem;display:flex;align-items:center;gap:14px;text-decoration:none;transition:.3s;position:relative;overflow:hidden}
-.c-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--a),var(--b));transform:scaleX(0);transition:.3s;transform-origin:left}
-.c-card:hover::after{transform:scaleX(1)}
-.c-card:hover{border-color:rgba(0,212,255,.2);transform:translateY(-3px)}
-.c-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,rgba(0,212,255,.12),rgba(123,97,255,.12));display:flex;align-items:center;justify-content:center;color:var(--a);font-size:.95rem;flex-shrink:0}
-.c-label{font-size:.7rem;color:var(--muted);margin-bottom:2px}
-.c-val{font-size:.85rem;color:var(--text);font-weight:500}
-
-footer{text-align:center;padding:2.5rem 6vw;border-top:1px solid var(--border);font-size:.78rem;color:var(--muted);position:relative;z-index:1}
-
+footer{text-align:center;padding:3rem 6vw;border-top:1px solid var(--border);font-size:.78rem;color:var(--muted);position:relative;z-index:1;letter-spacing:.01em}
 [data-l]{display:none}[data-l].on{display:block}
 [data-li]{display:none}[data-li].on{display:inline}
 </style>
 </head>
 <body>
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+<div id="cursor"></div><div id="cursor-ring"></div>
 <canvas id="bg-canvas"></canvas>
 
 <div class="modal-bg" id="modal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()"><i class="fa fa-times"></i></button>
-    <div class="modal-title" id="modal-title"></div>
-    <img class="modal-img" id="modal-img" src="" alt="proof"/>
+    <h3 class="modal-title" id="modal-title"></h3>
+    <img class="modal-img" id="modal-img" src="" alt=""/>
   </div>
 </div>
 
@@ -310,12 +292,6 @@ footer{text-align:center;padding:2.5rem 6vw;border-top:1px solid var(--border);f
 
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-photo-col">
-      <div class="hero-photo-frame">
-        <img src="assets/profile.jpg" alt="Vignesh Ravi"/>
-      </div>
-    </div>
-
     <div class="hero-text">
       <div class="hero-chip">
         <span data-li="en" class="on">Available · Open to new opportunities</span>
@@ -323,51 +299,59 @@ footer{text-align:center;padding:2.5rem 6vw;border-top:1px solid var(--border);f
       </div>
       <h1><span class="grad">Vignesh</span><br/>Ravi</h1>
 
-      <div class="hero-summary" id="hero-tags-wrap">
+      <div class="hero-summary">
         <div class="hero-tag-line" id="hero-tag-line"></div>
-        <p class="hero-tagline-text" id="hero-tagline-sub"></p>
+        <div class="hero-tagline-text" id="hero-tagline-sub"></div>
       </div>
-
       <div class="hero-btns">
-        <a class="btn-p" href="#experience">
-          <span data-li="en" class="on">View My Work <i class="fa fa-arrow-down"></i></span>
-          <span data-li="de">Meine Arbeit <i class="fa fa-arrow-down"></i></span>
-        </a>
-        <a class="btn-o" href="mailto:10r.vignesh@gmail.com">
-          <i class="fa fa-envelope"></i>
-          <span data-li="en" class="on">Get in Touch</span>
-          <span data-li="de">Kontakt aufnehmen</span>
-        </a>
+        <a href="#projects" class="btn-p"><span data-li="en" class="on">View Work <i class="fa fa-arrow-down"></i></span><span data-li="de">Arbeit ansehen <i class="fa fa-arrow-down"></i></span></a>
+        <a href="#contact" class="btn-o"><span data-li="en" class="on">Get in Touch</span><span data-li="de">Kontakt aufnehmen</span></a>
       </div>
       <div class="scroll-hint">
-        <span data-li="en" class="on">scroll</span><span data-li="de">scrollen</span>
+        <div><span data-li="en" class="on">Scroll</span><span data-li="de">Scrollen</span></div>
         <div class="scroll-line"></div>
       </div>
     </div>
-  </div>
-</section>
-
-<section style="padding:50px 5vw;position:relative;z-index:1">
-  <div class="si">
-    <div class="stats-row reveal">
-      <div class="sc"><div class="sn" data-count="3">0</div><div class="sl"><span data-li="en" class="on">Years of Professional Experience</span><span data-li="de">Jahre Berufserfahrung</span></div></div>
-      <div class="sc"><div class="sn" data-count="16">0</div><div class="sl"><span data-li="en" class="on">Complex Projects Delivered</span><span data-li="de">Komplexe Projekte Abgeschlossen</span></div></div>
-      <div class="sc"><div class="sn" data-count="10">0</div><div class="sl"><span data-li="en" class="on">Patents, Awards & Recognitions</span><span data-li="de">Patente & Auszeichnungen</span></div></div>
-      <div class="sc"><div class="sn" data-count="15" data-suffix="+">0</div><div class="sl"><span data-li="en" class="on">Technical Competencies</span><span data-li="de">Technische Kompetenzen</span></div></div>
+    <div class="hero-photo-col">
+      <div class="hero-photo-frame">
+        <img src="assets/profile.jpg" alt="Vignesh Ravi"/>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="experience" class="bg-alt">
+<section id="stats" class="bg-alt" style="background:linear-gradient(135deg,rgba(0,212,255,.02),rgba(123,97,255,.015))">
   <div class="si">
-    <p class="s-label reveal"><span data-li="en" class="on">Career</span><span data-li="de">Karriere</span></p>
-    <h2 class="s-title reveal"><span data-li="en" class="on">Work <em>Experience</em></span><span data-li="de">Berufs<em>erfahrung</em></span></h2>
+    <div class="stats-row">
+      <div class="sc reveal">
+        <div class="sn" data-count="3">3</div>
+        <div class="sl"><span data-li="en" class="on">Years of Professional Experience</span><span data-li="de">Jahre Berufserfahrung</span></div>
+      </div>
+      <div class="sc reveal">
+        <div class="sn" data-count="16">0</div>
+        <div class="sl"><span data-li="en" class="on">Complex Projects Delivered</span><span data-li="de">Komplexe Projekte Abgeschlossen</span></div>
+      </div>
+      <div class="sc reveal">
+        <div class="sn" data-count="10">0</div>
+        <div class="sl"><span data-li="en" class="on">Patents, Awards & Recognitions</span><span data-li="de">Patente & Auszeichnungen</span></div>
+      </div>
+      <div class="sc reveal">
+        <div class="sn" data-count="15" data-suffix="+">0</div>
+        <div class="sl"><span data-li="en" class="on">Technical Competencies</span><span data-li="de">Technische Kompetenzen</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="exp">
+  <div class="si">
+    <p class="s-label reveal"><span data-li="en" class="on">Career Journey</span><span data-li="de">Karriereweg</span></p>
+    <h2 class="s-title reveal"><span data-li="en" class="on">Professional <em>Experience</em></span><span data-li="de">Berufliche <em>Erfahrung</em></span></h2>
     <div class="s-div reveal"></div>
     <div class="exp-tabs reveal">
       <button class="exp-tab on" onclick="showTab(0)">Bonfiglioli</button>
       <button class="exp-tab" onclick="showTab(1)">Tunga Aerospace</button>
       <button class="exp-tab" onclick="showTab(2)">Ashok Leyland</button>
-      <button class="exp-tab" onclick="showTab(3)">Additional Training</button>
     </div>
 
     <div class="exp-pane on reveal" id="pane-0">
@@ -429,8 +413,8 @@ footer{text-align:center;padding:2.5rem 6vw;border-top:1px solid var(--border);f
         <div class="exp-date">Dec 2020 – May 2021</div>
         <div style="margin-bottom: 1.2rem;">
           <span class="p-badge" style="background:rgba(255,209,102,.1);color:var(--gold);border:1px solid rgba(255,209,102,.2)">
-            <span data-li="en" class="on">🏆 Best Project Award (TAFE) <span style="font-size:0.65rem; opacity:0.6;"></span></span>
-            <span data-li="de">🏆 Bestes Projekt (TAFE) <span style="font-size:0.65rem; opacity:0.6;"></span></span>
+            <span data-li="en" class="on">🏆 Best Project Award (TAFE)</span>
+            <span data-li="de">🏆 Bestes Projekt (TAFE)</span>
           </span>
         </div>
         <ul class="blist">
@@ -476,27 +460,15 @@ footer{text-align:center;padding:2.5rem 6vw;border-top:1px solid var(--border);f
 
     <div class="exp-pane" id="pane-2">
       <div class="exp-card">
-        <div class="exp-company">Ashok Leyland, Hosur-I, India <span style="font-size:0.65rem; opacity:0.6;"></span></div>
+        <div class="exp-company">Ashok Leyland, Hosur-I, India</div>
         <div class="exp-role"><span data-li="en" class="on">Student Intern (HR Department)</span><span data-li="de">Praktikant (Personalabteilung)</span></div>
-        <div class="exp-date">02/12/2019 – 20/12/2019 <span style="font-size:0.65rem; opacity:0.6;"></span></div>
+        <div class="exp-date">02/12/2019 – 20/12/2019</div>
         <div style="margin-bottom: 1.2rem;">
           <span onclick="openModal('Ashok Leyland Internship Certificate', 'assets/proof/ashok_leyland.jpg')" class="pub-link"><i class="fa fa-certificate"></i> <span data-li="en" class="on">View Certificate</span><span data-li="de">Zertifikat ansehen</span></span>
         </div>
         <ul class="blist">
-          <li><span data-l="en" class="on">Successfully formulated Standard Operating Procedures (SOP) for new apprentice entrants <span style="font-size:0.65rem; opacity:0.6;"></span>.</span><span data-l="de">Erfolgreiche Formulierung von Standardarbeitsanweisungen (SOP) für neue Auszubildende <span style="font-size:0.65rem; opacity:0.6;"></span>.</span></li>
-          <li><span data-l="en" class="on">Stipulated the SOP guidelines by thoroughly analyzing and documenting the detailed assembly procedures for H-series and P15-series engines <span style="font-size:0.65rem; opacity:0.6;"></span>.</span><span data-l="de">Festlegung der SOP-Richtlinien durch detaillierte Analyse und Dokumentation der Montageverfahren für Motoren der H- und P15-Serie <span style="font-size:0.65rem; opacity:0.6;"></span>.</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-pane" id="pane-3">
-      <div class="exp-card">
-        <div class="exp-company">Short-Term Internships & Vocational Training</div>
-        <div class="exp-role"><span data-li="en" class="on">Technical Trainee</span><span data-li="de">Technischer Auszubildender</span></div>
-        <ul class="blist" style="margin-top:1rem;">
-          <li><span data-l="en" class="on"><strong>Western Thomson (India) Limited (17/06/2019 – 28/06/2019):</strong> Underwent specialized internship training focused on assembly and testing environments <span style="font-size:0.65rem; opacity:0.6;"></span>. Enabled key validation steps for later thermostatic wax research projects <span style="font-size:0.65rem; opacity:0.6;"></span>.</span><span data-l="de"><strong>Western Thomson (India) Limited (17.06.2019 – 28.06.2019):</strong> Absolvierte ein spezialisiertes Praktikum mit Fokus auf Montage- und Testumgebungen <span style="font-size:0.65rem; opacity:0.6;"></span>. Ermöglichte wichtige Validierungsschritte für spätere thermostatische Wachsforschungsprojekte <span style="font-size:0.65rem; opacity:0.6;"></span>.</span></li>
-          <li><span data-l="en" class="on"><strong>Integral Coach Factory (ICF) (29.05.2019 – 04.06.2019):</strong> Completed an intensive industrial in-plant training program covering passenger vehicle manufacturing frameworks under the Ministry of Railways <span style="font-size:0.65rem; opacity:0.6;"></span>.</span><span data-l="de"><strong>Integral Coach Factory (ICF) (29.05.2019 – 04.06.2019):</strong> Absolvierte ein intensives industrielles Inplant-Training über Fertigungsstrukturen für Personenfahrzeuge unter dem Eisenbahnministerium <span style="font-size:0.65rem; opacity:0.6;"></span>.</span></li>
-          <li><span data-l="en" class="on"><strong>Goodwin Motors (20.05.2019 – 25.05.2019):</strong> Successfully completed a non-stipendiary vocational training block focusing heavily on hands-on practical training for cars, engines, Bosch FI, starter motors, alternators, and engine diagnostic systems <span style="font-size:0.65rem; opacity:0.6;"></span>.</span><span data-l="de"><strong>Goodwin Motors (20.05.2019 – 25.05.2019):</strong> Erfolgreicher Abschluss eines unbezahlten Berufstrainings mit starkem Fokus auf praktisches Training für Autos, Motoren, Bosch FI, Startermotoren, Lichtmaschinen und Motordiagnosesysteme <span style="font-size:0.65rem; opacity:0.6;"></span>.</span></li>
+          <li><span data-l="en" class="on">Successfully formulated Standard Operating Procedures (SOP) for new apprentice entrants.</span><span data-l="de">Erfolgreiche Formulierung von Standardarbeitsanweisungen (SOP) für neue Auszubildende.</span></li>
+          <li><span data-l="en" class="on">Stipulated the SOP guidelines by thoroughly analyzing and documenting the detailed assembly procedures for H-series and P15-series engines.</span><span data-l="de">Festlegung der SOP-Richtlinien durch detaillierte Analyse und Dokumentation der Montageverfahren für Motoren der H- und P15-Serie.</span></li>
         </ul>
       </div>
     </div>
@@ -565,14 +537,14 @@ footer{text-align:center;padding:2.5rem 6vw;border-top:1px solid var(--border);f
       <div class="p-card reveal">
         <div class="p-icon" style="background:linear-gradient(135deg,rgba(255,209,102,.12),rgba(255,123,123,.08));color:var(--gold)"><i class="fa fa-plane-departure"></i></div>
         <div class="p-badge" style="background:rgba(255,209,102,.1);color:var(--gold);border:1px solid rgba(255,209,102,.2)">
-          <span data-li="en" class="on">🏆 Best Project Award 2021 <span style="font-size:0.65rem; opacity:0.6;"></span></span><span data-li="de">🏆 Bestes Projekt 2021 <span style="font-size:0.65rem; opacity:0.6;"></span></span>
+          <span data-li="en" class="on">🏆 Best Project Award 2021</span><span data-li="de">🏆 Bestes Projekt 2021</span>
         </div>
-        <div class="p-title"><span data-l="en" class="on">Hybrid VTOL Aircraft <span style="font-size:0.65rem; opacity:0.6;"></span></span><span data-l="de">Hybrides VTOL-Flugzeug <span style="font-size:0.65rem; opacity:0.6;"></span></span></div>
+        <div class="p-title"><span data-l="en" class="on">Hybrid VTOL Aircraft</span><span data-l="de">Hybrides VTOL-Flugzeug</span></div>
         <ul class="blist">
-          <li><span data-l="en" class="on">Completed Structural Design Analysis and Fabrication of Vertical Takeoff and Landing Unmanned Aerial Vehicle <span style="font-size:0.65rem; opacity:0.6;"></span>.</span><span data-l="de">Abgeschlossene Strukturanalyse und Fertigung eines unbemannten VTOL-Luftfahrzeugs <span style="font-size:0.65rem; opacity:0.6;"></span>.</span></li>
-          <li><span data-l="en" class="on">Utilized Ansys APDL and Workbench for modal, explicit dynamics, and linear buckling simulations <span style="font-size:0.65rem; opacity:0.6;"></span>.</span><span data-l="de">Nutzung von Ansys APDL und Workbench für Modal-, explizite Dynamik- und lineare Beulsimulationen <span style="font-size:0.65rem; opacity:0.6;"></span>.</span></li>
-          <li><span data-l="en" class="on">Validated analytical boom sizing calculations against simulation results, achieving acceptable deviations (7.37% & 21.39%) <span style="font-size:0.65rem; opacity:0.6;"></span>.</span><span data-l="de">Validierung analytischer Auslegerdimensionierungen anhand von Simulationsergebnissen, wobei akzeptable Abweichungen (7,37 % & 21,39 %) erzielt wurden <span style="font-size:0.65rem; opacity:0.6;"></span>.</span></li>
-          <li><span data-l="en" class="on">Manufactured components using CNC machining and 3D printing of PETG polymers, followed by carbon fiber vacuum bagging <span style="font-size:0.65rem; opacity:0.6;"></span>.</span><span data-l="de">Herstellung von Komponenten mittels CNC-Bearbeitung und 3D-Druck von PETG-Polymeren, gefolgt von Kohlefaser-Vakuum-Bagging <span style="font-size:0.65rem; opacity:0.6;"></span>.</span></li>
+          <li><span data-l="en" class="on">Completed Structural Design Analysis and Fabrication of Vertical Takeoff and Landing Unmanned Aerial Vehicle.</span><span data-l="de">Abgeschlossene Strukturanalyse und Fertigung eines unbemannten VTOL-Luftfahrzeugs.</span></li>
+          <li><span data-l="en" class="on">Utilized Ansys APDL and Workbench for modal, explicit dynamics, and linear buckling simulations.</span><span data-l="de">Nutzung von Ansys APDL und Workbench für Modal-, explizite Dynamik- und lineare Beulsimulationen.</span></li>
+          <li><span data-l="en" class="on">Validated analytical boom sizing calculations against simulation results, achieving acceptable deviations (7.37% & 21.39%).</span><span data-l="de">Validierung analytischer Auslegerdimensionierungen anhand von Simulationsergebnissen, wobei akzeptable Abweichungen (7,37 % & 21,39 %) erzielt wurden.</span></li>
+          <li><span data-l="en" class="on">Manufactured components using CNC machining and 3D printing of PETG polymers, followed by carbon fiber vacuum bagging.</span><span data-l="de">Herstellung von Komponenten mittels CNC-Bearbeitung und 3D-Druck von PETG-Polymeren, gefolgt von Kohlefaser-Vakuum-Bagging.</span></li>
         </ul>
         <div class="p-result"><span data-li="en" class="on">✦ Aerospace Innovation</span><span data-li="de">✦ Luft- und Raumfahrtinnovation</span></div>
       </div>
