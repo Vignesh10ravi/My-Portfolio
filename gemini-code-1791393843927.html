@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Vignesh Ravi</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Option 2: Sleek Tech Executive Colors */
+  --bg:#0f1419;
+  --bg2:#131a23;
+  --card:#17202c;
+  --border:rgba(255,255,255,0.05);
+  --border-light:rgba(255,255,255,0.08);
+  --border-med:rgba(255,255,255,0.15);
+  
+  --accent:#1e90ff; /* Dodger Blue */
+  --accent2:#00bfff; /* Deep Sky Blue */
+  --accent3:#2e8b57; /* Sea Green */
+  --accent-warm:#d4af37; /* Goldenrod */
+  
+  --text-primary:#f1f5f9;
+  --text-secondary:#94a3b8;
+  --text-muted:#64748b;
+  
+  --r:8px; /* Sharper corners for a sleeker look */
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text-primary);
+  overflow-x:hidden;
+  position:relative;
+  cursor:default;
+}
+
+/* Subtle background mesh */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(1000px circle at 50% -10%, rgba(30,144,255,.03), transparent 80%);
+  pointer-events:none;z-index:-1;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5vw;height:70px;
+  background:rgba(15,20,25,0.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.logo{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;
+  letter-spacing:.05em;color:var(--text-primary);text-transform:uppercase;
+}
+.logo span { color: var(--accent); }
+.nav-center{display:flex;gap:1.5rem;align-items:center}
+.nav-links{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.nav-links a{
+  color:var(--text-secondary);text-decoration:none;font-size:.85rem;font-weight:500;
+  padding:6px 12px;border-radius:4px;transition:.2s;white-space:nowrap;
+}
+.nav-links a:hover{color:var(--text-primary);background:rgba(255,255,255,.04)}
+.lang-pill{
+  display:flex;align-items:center;background:var(--card);border:1px solid var(--border);
+  border-radius:4px;padding:4px;gap:2px;
+}
+.lb{
+  cursor:pointer;padding:6px 14px;border-radius:4px;font-size:.75rem;font-weight:600;
+  border:none;background:transparent;color:var(--text-muted);transition:.2s;
+}
+.lb.on{background:rgba(30,144,255,.1);color:var(--accent)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:120px 4vw 80px;position:relative;z-index:1;
+}
+.hero-inner{
+  max-width:1100px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 340px;
+  align-items:center;gap:4rem;
+}
+.hero-text{text-align:left;padding:0}
+.hero-photo-col{
+  display:flex;justify-content:center;align-items:center;
+  flex-shrink:0;width:100%;
+}
+.hero-photo-frame{
+  width:280px;height:280px;
+  border-radius:50%;
+  position:relative;flex-shrink:0;
+  border: 1px solid var(--border-light);
+  background: var(--card);
+  overflow:hidden;
+}
+.hero-photo-frame::before{
+  content:'';position:absolute;inset:-4px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--a),var(--b),var(--c));
+  z-index:0;animation:spinRing 6s linear infinite;
+}
+@keyframes spinRing{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.hero-photo-frame::after{
+  content:'';position:absolute;inset:4px;
+  border-radius:50%;background:var(--bg);z-index:1;
+}
+.hero-photo-frame img{
+  position:absolute;
+  inset:4px; 
+  width: 110%; 
+  height: 110%; 
+  left: -5%; 
+  top: -5%; 
+  border-radius:50%;
+  object-fit:contain; 
+  object-position:center;
+  background-color:var(--bg); 
+  z-index:2;display:block;
+}
+
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;gap:2.5rem;padding:100px 5vw 40px;}
+  .hero-text{text-align:center;order:2}
+  .hero-photo-col{order:1;margin:0 auto}
+  .hero-photo-frame{width:220px;height:220px}
+  .nav-links a{display:none}
+  .scroll-hint{display:none}
+  .hero h1{font-size:clamp(2rem,8vw,3rem)}
+}
+
+.hero-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;border:1px solid var(--border-med);border-radius:4px;
+  padding:6px 14px;font-size:.7rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--text-secondary);margin-bottom:1.5rem;
+  animation:fadeUp .8s ease both;
+}
+.hero-chip::before{
+  content:'';width:6px;height:6px;background:var(--accent3);border-radius:50%;
+}
+
+.hero h1{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(2.5rem,4vw,3.8rem);
+  line-height:1.1;letter-spacing:-.03em;color:var(--text-primary);
+  margin-bottom:1rem;animation:fadeUp .8s .15s ease both;
+}
+.hero h1 .highlight { color: var(--accent); }
+
+.hero-tagline-text{
+  font-size:1.05rem;color:var(--text-secondary);line-height:1.7;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .5s .25s ease,transform .5s .25s ease;
+  max-width:540px;margin-bottom:2rem;
+}
+.hero-tagline-text.vis{opacity:1;transform:none}
+
+.hero-btns{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:2rem;animation:fadeUp .8s .35s ease both}
+.btn-p{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--text-primary);color:var(--bg);
+  text-decoration:none;font-weight:600;font-size:.9rem;
+  padding:11px 24px;border-radius:4px;border:none;cursor:pointer;transition:.2s;
+}
+.btn-p:hover{background:var(--text-secondary);transform:translateY(-2px)}
+.btn-o{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:transparent;color:var(--text-primary);
+  text-decoration:none;font-weight:500;font-size:.9rem;
+  padding:10px 22px;border-radius:4px;border:1px solid var(--border-light);transition:.2s;
+}
+.btn-o:hover{border-color:var(--text-primary);background:rgba(255,255,255,.03)}
+
+.scroll-hint{
+  display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+  color:var(--text-muted);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  animation:fadeUp .8s .5s ease both;margin-top:2rem;
+}
+.scroll-line{width:1px;height:40px;background:var(--border-med);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTIONS ── */
+section{padding:90px 5vw;position:relative;z-index:1}
+.si{max-width:940px;margin:0 auto}
+.s-label{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.5rem;display:flex;align-items:center;gap:8px}
+.s-label::before{content:'';width:20px;height:1px;background:var(--text-muted)}
+.s-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.4rem);color:var(--text-primary);margin-bottom:3rem;line-height:1.2;letter-spacing:-.02em}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.bg-alt{background:var(--bg2)}
+
+/* ── STATS ── */
+.stats-row{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1rem;
+}
+.sc{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.5rem;text-align:left;transition:.2s;
+}
+.sc:hover{border-color:var(--border-med);transform:translateY(-2px)}
+.sn{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:2rem;
+  color:var(--text-primary);margin-bottom:.2rem;
+}
+.sl{font-size:.85rem;color:var(--text-secondary);line-height:1.4}
+
+/* ── EXP TABS ── */
+.exp-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem}
+.exp-tab{
+  cursor:pointer;padding:8px 16px;border-radius:4px;font-size:.85rem;font-weight:500;
+  background:transparent;border:1px solid var(--border);color:var(--text-muted);transition:.2s;
+}
+.exp-tab:hover{color:var(--text-primary);border-color:var(--border-light)}
+.exp-tab.on{background:var(--text-primary);color:var(--bg);border-color:var(--text-primary)}
+
+.exp-pane{display:none}
+.exp-pane.on{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.exp-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:2rem;position:relative;
+}
+.exp-company{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.15rem;color:var(--text-primary)}
+.exp-role{font-size:.95rem;margin:.4rem 0 1rem;color:var(--text-secondary);font-weight:400}
+.exp-date{
+  display:inline-block;font-size:.75rem;color:var(--text-muted);font-weight:500;
+  background:transparent;border:1px solid var(--border);border-radius:4px;
+  padding:4px 10px;margin-bottom:1.5rem;
+}
+.blist{list-style:none;display:flex;flex-direction:column;gap:12px}
+.blist li{
+  font-size:.9rem;color:var(--text-secondary);padding-left:1.2rem;
+  position:relative;line-height:1.6;
+}
+.blist li::before{
+  content:'';position:absolute;left:0;top:.5em;width:4px;height:4px;
+  background:var(--text-muted);border-radius:50%;
+}
+
+/* ── MODAL LIGHTBOX ── */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(8,10,15,.95);z-index:2000;align-items:center;justify-content:center;}
+.modal-bg.open{display:flex}
+.modal-box{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:1.5rem;max-width:860px;width:92vw;max-height:90vh;overflow:auto;position:relative}
+.modal-close{position:absolute;top:1rem;right:1rem;background:transparent;border:1px solid var(--border-med);color:var(--text-primary);width:32px;height:32px;border-radius:4px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.2s}
+.modal-close:hover{background:rgba(255,255,255,.05)}
+.modal-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.1rem;color:var(--text-primary);margin-bottom:1rem;padding-right:2rem}
+.modal-img{width:100%;border-radius:4px;display:block}
+
+/* ── PROJECTS ── */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.p-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:2rem;transition:.2s;display:flex;flex-direction:column;
+}
+.p-card:hover{border-color:var(--border-med);transform:translateY(-2px)}
+.p-badge{
+  display:inline-block;font-size:.7rem;font-weight:500;padding:4px 10px;
+  border-radius:4px;letter-spacing:.03em;margin-bottom:1rem;
+  background:rgba(255,255,255,.03);border:1px solid var(--border);color:var(--text-muted);
+}
+.p-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.1rem;color:var(--text-primary);margin-bottom:1rem;line-height:1.4}
+.p-result{
+  margin-top:auto;padding-top:1.5rem;
+  font-size:.8rem;color:var(--text-secondary);font-weight:500;
+}
+
+/* ── SKILLS ── */
+.skill-section-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+@media(max-width:760px){.skill-section-grid{grid-template-columns:1fr}}
+.skill-cat-title{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;color:var(--text-primary);margin-bottom:1rem;border-bottom:1px solid var(--border);padding-bottom:.5rem}
+.skill-items{display:flex;flex-direction:column;gap:.5rem}
+.skill-row{display:flex;align-items:center;justify-content:space-between;padding:.5rem 0;}
+.skill-row-name{font-size:.9rem;color:var(--text-secondary)}
+.skill-dots{display:flex;gap:4px}
+.dot{width:16px;height:4px;border-radius:2px;background:var(--border);transition:.3s}
+.dot.on.pro{background:var(--text-secondary)}
+.dot.on.alt{background:var(--text-muted)}
+
+.cert-wrap{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.cert-pill{
+  display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:500;
+  padding:8px 16px;border-radius:4px;background:var(--card);color:var(--text-secondary);
+  border:1px solid var(--border);transition:.2s;
+}
+.cert-pill.interactive{cursor:pointer;}
+.cert-pill.interactive:hover{border-color:var(--border-med);color:var(--text-primary)}
+.tags-title{font-size:.8rem;font-weight:600;color:var(--text-primary);margin-bottom:1rem}
+
+/* ── EDUCATION ── */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.e-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:2rem;transition:.2s;}
+.e-card:hover{border-color:var(--border-med)}
+.e-badge{display:inline-block;background:transparent;color:var(--text-muted);border:1px solid var(--border);font-size:.7rem;font-weight:500;padding:4px 10px;border-radius:4px;margin-bottom:1rem}
+.e-degree{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.1rem;color:var(--text-primary);margin-bottom:.4rem;line-height:1.35}
+.e-focus{font-size:.9rem;color:var(--text-secondary);margin-bottom:.8rem}
+.e-school{font-size:.85rem;color:var(--text-muted);margin-bottom:.2rem}
+.e-date{font-size:.75rem;color:var(--text-muted)}
+
+/* ── PUBLICATIONS & CONFERENCES ── */
+.conf-list{display:flex;flex-direction:column;gap:1rem}
+.conf-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.5rem 2rem;display:flex;flex-direction:column;gap:.5rem;transition:.2s;
+}
+.conf-card:hover{border-color:var(--border-med)}
+.conf-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;color:var(--text-primary);line-height:1.4}
+.conf-meta{font-size:.9rem;color:var(--text-secondary);line-height:1.6;margin-bottom:.5rem}
+.conf-footer{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem}
+.pub-link{
+  display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:500;
+  padding:6px 12px;border-radius:4px;text-decoration:none;transition:.2s;
+  border:1px solid var(--border);color:var(--text-secondary);background:transparent;
+}
+.pub-link:hover{border-color:var(--text-primary);color:var(--text-primary)}
+.pub-link.interactive{cursor:pointer;}
+
+/* ── AWARDS & TRAININGS ── */
+.awards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.award-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.5rem;display:flex;flex-direction:column;gap:.5rem;transition:.2s;
+}
+.award-card.interactive{cursor:pointer;}
+.award-card.interactive:hover{border-color:var(--border-med)}
+.award-title{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;color:var(--text-primary);line-height:1.35}
+.award-sub{font-size:.85rem;color:var(--text-secondary)}
+.award-year{font-size:.75rem;color:var(--text-muted);margin-top:auto;padding-top:.5rem}
+
+.training-list{display:grid;grid-template-columns:1fr;gap:1rem}
+.tr-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.5rem;display:flex;flex-direction:column;gap:.5rem;transition:.2s;
+}
+.tr-title{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;color:var(--text-primary);line-height:1.35}
+.tr-org{font-size:.85rem;color:var(--text-secondary);line-height:1.5}
+.tr-date{font-size:.75rem;color:var(--text-muted);margin-top:auto;padding-top:.5rem}
+
+/* ── LANG SPOKEN ── */
+.lang-spoken{display:flex;gap:1rem;flex-wrap:wrap;}
+.lp{
+  display:flex;align-items:center;gap:12px;background:var(--card);
+  border:1px solid var(--border);border-radius:var(--r);padding:12px 20px;
+}
+.lp-flag{font-size:1.2rem}
+.lp-name{font-size:.9rem;font-weight:500;color:var(--text-primary)}
+.lp-lvl{font-size:.75rem;color:var(--text-muted)}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
+.c-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.5rem;display:flex;align-items:center;gap:16px;text-decoration:none;transition:.2s;
+}
+.c-card:hover{border-color:var(--border-med);transform:translateY(-2px)}
+.c-icon{font-size:1.2rem;color:var(--text-secondary)}
+.c-label{font-size:.75rem;color:var(--text-muted);margin-bottom:4px}
+.c-val{font-size:.9rem;color:var(--text-primary);font-weight:500}
+
+footer{
+  text-align:center;padding:3rem 5vw;border-top:1px solid var(--border);
+  font-size:.8rem;color:var(--text-muted);background:var(--bg2);
+}
+
+[data-l]{display:none}[data-l].on{display:block}
+[data-li]{display:none}[data-li].on{display:inline}
+</style>
+</head>
+<body>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()"><i class="fa fa-times"></i></button>
+    <div class="modal-title" id="modal-title"></div>
+    <img class="modal-img" id="modal-img" src="" alt="proof"/>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Vignesh<span>.</span></div>
+  <div class="nav-links">
+    <a href="#experience"><span data-li="en" class="on">Experience</span><span data-li="de">Erfahrung</span></a>
+    <a href="#projects"><span data-li="en" class="on">Projects</span><span data-li="de">Projekte</span></a>
+    <a href="#skills"><span data-li="en" class="on">Skills</span><span data-li="de">Kompetenzen</span></a>
+    <a href="#education"><span data-li="en" class="on">Education</span><span data-li="de">Ausbildung</span></a>
+    <a href="#research"><span data-li="en" class="on">Research</span><span data-li="de">Forschung</span></a>
+    <a href="#awards"><span data-li="en" class="on">Awards</span><span data-li="de">Auszeichnungen</span></a>
+    <a href="#contact"><span data-li="en" class="on">Contact</span><span data-li="de">Kontakt</span></a>
+  </div>
+  <div class="lang-pill">
+    <button class="lb on" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lb" id="btn-de" onclick="setLang('de')">DE</button>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <!-- Left: Text -->
+    <div class="hero-text">
+      <div class="hero-chip">
+        <span data-li="en" class="on">Available for opportunities</span>
+        <span data-li="de">Verfügbar für neue Möglichkeiten</span>
+      </div>
+      <h1>Vignesh <span class="highlight">Ravi</span></h1>
+
+      <p class="hero-tagline-text vis" id="hero-tagline-sub">
+        <span data-li="en" class="on">M.Sc. Computational Materials Science student specializing in simulation-driven engineering, finite element methods, and AI-assisted materials modeling.</span>
+        <span data-li="de">Masterstudent in Computational Materials Science, spezialisiert auf simulationsgestützte Konstruktion, Finite-Elemente-Methoden und KI-gestützte Materialmodellierung.</span>
+      </p>
+
+      <div class="hero-btns">
+        <a class="btn-p" href="#projects">
+          <span data-li="en" class="on">View Projects</span>
+          <span data-li="de">Projekte ansehen</span>
+        </a>
+        <a class="btn-o" href="mailto:10r.vignesh@gmail.com">
+          <span data-li="en" class="on">Contact Me</span>
+          <span data-li="de">Kontakt aufnehmen</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Photo -->
+    <div class="hero-photo-col">
+      <div class="hero-photo-frame">
+        <img src="assets/profile.jpg" alt="Vignesh Ravi"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="padding:40px 5vw; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="si">
+    <div class="stats-row reveal">
+      <div class="sc"><div class="sn" data-count="3">0</div><div class="sl"><span data-li="en" class="on">Years of Professional Experience</span><span data-li="de">Jahre Berufserfahrung</span></div></div>
+      <div class="sc"><div class="sn" data-count="16">0</div><div class="sl"><span data-li="en" class="on">Complex Projects Delivered</span><span data-li="de">Komplexe Projekte Abgeschlossen</span></div></div>
+      <div class="sc"><div class="sn" data-count="10">0</div><div class="sl"><span data-li="en" class="on">Patents, Awards & Recognitions</span><span data-li="de">Patente & Auszeichnungen</span></div></div>
+      <div class="sc"><div class="sn" data-count="15" data-suffix="+">0</div><div class="sl"><span data-li="en" class="on">Technical Competencies</span><span data-li="de">Technische Kompetenzen</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ EXPERIENCE ═══════════ -->
+<section id="experience">
+  <div class="si">
+    <p class="s-label reveal"><span data-li="en" class="on">Career</span><span data-li="de">Karriere</span></p>
+    <h2 class="s-title reveal"><span data-li="en" class="on">Work Experience</span><span data-li="de">Berufserfahrung</span></h2>
+    
+    <div class="exp-tabs reveal">
+      <button class="exp-tab on" onclick="showTab(0)">Bonfiglioli</button>
+      <button class="exp-tab" onclick="showTab(1)">Tunga Aerospace</button>
+      <button class="exp-tab" onclick="showTab(2)">Ashok Leyland</button>
+      <button class="exp-tab" onclick="showTab(3)">Additional Training</button>
+    </div>
+
+    <!-- Bonfiglioli Experience -->
+    <div class="exp-pane on reveal" id="pane-0">
+      <div class="exp-card" style="font-family: 'Times New Roman', Times, serif;">
+        <div class="exp-company" style="font-family: 'Times New Roman', Times, serif; font-size: 1.25rem; letter-spacing: normal;">Bonfiglioli Transmissions Pvt. Ltd., Chennai, India</div>
+        <div class="exp-role" style="font-family: 'Times New Roman', Times, serif; font-size: 1rem; letter-spacing: normal;">
+          <span data-li="en" class="on">Mechanical Design Engineer — R&D</span>
+          <span data-li="de">Konstruktionsingenieur Mechanik — R&D</span>
+        </div>
+        <div class="exp-date" style="font-family: 'Times New Roman', Times, serif; font-size: 0.85rem; letter-spacing: normal; margin-bottom: 0.5rem; background:transparent; border:none; padding:0; color:var(--text-secondary);">Jun 2021 – Aug 2024</div>
+        <div style="margin-bottom: 1.5rem; font-family: 'Inter', sans-serif;">
+          <span onclick="openModal('Bonfiglioli Experience Letter', 'assets/proof/bonfiglioli_experience_letter.jpg')" class="pub-link interactive"><i class="fa fa-file-alt"></i> <span data-li="en" class="on">View Experience Letter</span><span data-li="de">Erfahrungsbericht ansehen</span></span>
+        </div>
+        
+        <ul class="blist" style="font-family: 'Times New Roman', Times, serif; font-size: 0.95rem; color:#d1d5db;">
+          <li>
+            <span data-l="en" class="on"><strong>CAD & 3D Design Engineering:</strong> Advanced 3D Modeling & Technical Drawings from concept design through detailed manufacturing drawings; GD&T analysis, tolerance stack-up reviews, DFM principles incorporated per company standards and production constraints. Creation of parametric 3D models for design flexibility, variant generation, and rapid design iteration. Managed sheet metal & assembly configurations including component pattern design, assembly structures, and mechanical fastening systems.</span>
+            <span data-l="de"><strong>CAD & 3D-Konstruktion:</strong> Fortschrittliche 3D-Modellierung & technische Zeichnungen vom Konzeptdesign bis hin zu detaillierten Fertigungszeichnungen unter Einbeziehung von GD&T, Toleranzanalysen und DFM-Prinzipien. Erstellung parametrischer 3D-Modelle für Designflexibilität und schnelle Designiterationen. Blech- & Baugruppenkonstruktion inklusive Bauteilmusterdesign und mechanischen Befestigungssystemen.</span>
+          </li>
+          <li>
+            <span data-l="en" class="on"><strong>Electric Motor Mechanical Design & Engineering:</strong> Design and detailed engineering of stator and rotor components for Synchronous Reluctance (SynRM) and Asynchronous (Induction) motors. Optimized manufacturing feasibility for motor cores, including lamination stacking strategies, core geometry, winding slot design/layout, material selection for iron loss optimization, punching tolerance analysis, and DFM for core assembly. Designed housings, end covers, flanges, and brackets focused on optimal thermal interface and heat dissipation workflows via water-jackets and ventilation duct arrangements.</span>
+            <span data-l="de"><strong>Mechanische Konstruktion von Elektromotoren:</strong> Konstruktion und Detail-Engineering von Stator- und Rotorübergängen für Synchronreluktanz- (SynRM) und Asynchronmotoren (Induktion). Optimierung der Fertigungsaktivitäten für Motorkerne (Lamellenstapelstrategien, Kerngeometrie, Wicklungsnutdesign, Materialauswahl zur Eisenverlustoptimierung). Gehäusedesign mit Fokus auf optimale thermische Schnittstellen und Wärmeabfuhr über Wassermäntel und Belüftungskanäle.</span>
+          </li>
+          <li>
+            <span data-l="en" class="on"><strong>Advanced Cooling System Development (Servo Fan Project):</strong> Led the feasibility study and technical development of an integrated variable-speed servo fan cooling architecture mechanically linked to motor operating profiles. Optimized fan geometries and motor interfaces, successfully enabling industrial motors to operate efficiently under high-load/low-speed conditions with superior thermal control and an extended operational envelope. Delivered extensive manufacturing feasibility reviews and cost-benefit analysis.</span>
+            <span data-l="de"><strong>Entwicklung fortschrittlicher Kühlsysteme (Servolüfter-Projekt):</strong> Leitung der Machbarkeitsstudie und technischen Auslegung einer integrierten, drehzahlvariablen Servolüfter-Kühlarchitektur, die mechanisch an die Motorbetriebsprofile gekoppelt ist. Optimierte Lüftergeometrien und Motorschnittstellen ermöglichten einen effizienten Betrieb unter Hochlast-/Niedrigdrehzahlbedingungen bei verbesserter thermischer Kontrolle.</span>
+          </li>
+          <li>
+            <span data-l="en" class="on"><strong>DC Brake Integration & Supplier Development:</strong> Evaluated and integrated functional DC brake components into electric motor assemblies. Conducted worldwide supplier scouting, technical requirement definition, and robust procurement feasibility assessments evaluating cost, quality standards, and lead times. Coordinated customized product validation and integration parameters across global supply networks to ensure scalable series production alignment.</span>
+            <span data-l="de"><strong>Gleichstrombremsen-Integration & Lieferantenentwicklung:</strong> Evaluierung und funktionale Integration von DC-Bremskomponenten in Elektromotorenbaugruppen. Durchführung weltweiter Lieferantenscoutings, Definition technischer Anforderungen und robuster Machbarkeitsbewertungen hinsichtlich Kosten, Qualitätsstandards und Lieferzeiten zur Absicherung der Serienproduktion.</span>
+          </li>
+          <li>
+            <span data-l="en" class="on"><strong>Drivetrain Component Design & Optimization:</strong> Led major gear profile optimization initiatives for standardization and production efficiency across fast-moving product lines. Refined tooth geometry parameters, pressure angles, and materials to reduce variability and improve manufacturing yield, establishing dual-supplier production capabilities and robust supply chain resilience. Designed bevel gear architectures, housing arrangements, bearing support structures, and oil sealing paths while evaluating in-house machine procurement options and technical ROI parameters.</span>
+            <span data-l="de"><strong>Konstruktion & Optimierung von Antriebskomponenten:</strong> Leitung von Initiativen zur Getriebeprofiloptimierung für Standardisierung und Produktionseffizienz schnelllebiger Produktlinien. Verfeinerung von Zahngeometrien, Eingriffswinkeln und Werkstoffen zur Verringerung von Fertigungsschwankungen. Konstruktion von Kegelradarchitekturen, Lagerstützstrukturen und Öldichtungen bei gleichzeitiger Bewertung von internen Maschinenbeschaffungsoptionen.</span>
+          </li>
+          <li>
+            <span data-l="en" class="on"><strong>KISSsoft & Mechanical Component Optimization:</strong> Applied KISSsoft for comprehensive gear data parameterization (diameter, teeth, module optimization), bearing sizing, fastener calculation, and overall assembly validation under mechanical and thermal load conditions. Seamlessly drove combined system-level performance validation for integrated motor, gearbox, reducer, brake, and cooling structures.</span>
+            <span data-l="de"><strong>KISSsoft & Optimierung mechanischer Komponenten:</strong> Einsatz von KISSsoft zur Getriebeparametrisierung (Durchmesser-, Zähne-, Moduloptimierung), Lagerauslegung, Verbindungselementeberechnung und Baugruppenvalidierung unter mechanischen und thermischen Lastbedingungen. Systemübergreifende Leistungsvalidierung für integrierte Motor-Getriebe-Kombinationen.</span>
+          </li>
+          <li>
+            <span data-l="en" class="on"><strong>Manufacturing Process Engineering & Strategic Cost Optimization:</strong> Optimized housing elements, flanges, and structural brackets for complex die-casting and sand-casting processes through core wall thickness validation, draft angle configuration, and parting line evaluation. Won the in-house Design Ingenuity Award for delivering an innovative 10% weight reduction on a high-margin hoist drive gearbox housing. Achieved 3–4% baseline cost reduction across high-volume lines via Design for Manufacturability (DFM) capability mappings and led 20+ cross-functional Value Engineering (VAVE) tasks averaging 3–5% cost optimization per project.</span>
+            <span data-l="de"><strong>Fertigungstechnik & Strategische Kostenoptimierung:</strong> Optimierung von Gehäuseelementen, Flanschen und Halterungen für Druck- und Sandgussverfahren mittels Wandstärkenvalidierung und DFM. Erhalt des internen Design Ingenuity Awards für eine innovative 10%ige Gewichtsreduzierung bei einem hochmargigen Hubwerksgetriebegehäuse. Durchführung von über 20 VAVE-Projekten mit durchschnittlich 3–5% Kostenoptimierung pro Projekt.</span>
+          </li>
+          <li>
+            <span data-l="en" class="on"><strong>Enterprise Systems & Project Management:</strong> Controlled technical configurations and complex product bills of materials using TeamCenter PLM environments, driving strict document version management and ECR/ECN engineering change workflows. Supervised material master creation and financial costing data across SAP/ERP instances. Coordinated cross-functional international project streams spanning European (Germany, Italy) and Asian (Vietnam, India) hubs to consistently execute lifecycle benchmarks from concept mockups to finalized series production ramp-up.</span>
+            <span data-l="de"><strong>Unternehmenssysteme & Projektmanagement:</strong> Steuerung technischer Konfigurationen und komplexer Produktstücklisten mittels TeamCenter PLM-Umgebungen (ECR/ECN-Workflows). Organisation von Materialstämmen und Kalkulationsdaten in SAP/ERP. Koordinierte interdisziplinäre, internationale Projektteams in Europa (Deutschland, Italien) und Asien (Vietnam, Indien) von der Konzeptphase bis zum Serienanlauf.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Tunga Aerospace (Bachelor's Thesis) -->
+    <div class="exp-pane" id="pane-1">
+      <div class="exp-card">
+        <div class="exp-company">Tunga Aerospace Industries Ltd., Chennai, India</div>
+        <div class="exp-role">
+          <span data-li="en" class="on">Bachelor's Thesis: Design and Analysis of a Hybrid Fixed-Wing VTOL UAV</span>
+          <span data-li="de">Bachelorarbeit: Design und Analyse eines hybriden VTOL-Starrflüglers</span>
+        </div>
+        <div class="exp-date" style="background:transparent; border:none; padding:0;">Dec 2020 – May 2021</div>
+        <div style="margin-bottom: 1.5rem;">
+          <span class="p-badge" style="background:rgba(212,175,55,.1);color:var(--accent-warm);border:1px solid rgba(212,175,55,.2); font-size: .8rem;">
+            <span data-li="en" class="on">🏆 Best Project Award (TAFE)</span>
+            <span data-li="de">🏆 Bestes Projekt (TAFE)</span>
+          </span>
+        </div>
+        <ul class="blist">
+          <li>
+            <span data-l="en" class="on">Performed static and dynamic FEM analyses (modal analysis, explicit dynamics, linear buckling) in ANSYS APDL and Workbench across VTOL and forward-flight modes, including model setup, meshing, and boundary condition definition for a hybrid fixed-wing VTOL UAV designed for 5,000 m altitude operation.</span>
+            <span data-l="de">Durchführung statischer und dynamischer FEM-Analysen (Modalanalyse, explizite Dynamik, lineares Beulen) in ANSYS APDL und Workbench für VTOL- und Vorwärtsflugmodi, einschließlich Modellaufbau, Vernetzung und Definition der Randbedingungen für ein hybrides VTOL-UAV (5.000 m Flughöhe).</span>
+          </li>
+          <li>
+            <span data-l="en" class="on">Validated analytical boom-sizing calculations against ANSYS simulation results, confirming structural predictions with high accuracy (7.37% deviation in bending stress, 21.39% deviation in deflection) — well within the ±30% aerospace design limit.</span>
+            <span data-l="de">Validierung analytischer Auslegerdimensionierungen gegen ANSYS-Simulationsergebnisse unter Bestätigung der Strukturvorhersagen mit hoher Genauigkeit (7,37 % Abweichung bei Biegespannung, 21,39 % bei Durchbiegung) – weit innerhalb der ±30 % Luft- und Raumfahrt-Designgrenze.</span>
+          </li>
+          <li>
+            <span data-l="en" class="on">Engineered a shock-absorbing PETG landing gear system, performing theoretical impact calculations and ANSYS Explicit Dynamics drop-test simulations (20 m free fall) to ensure controlled yielding under severe impact and protect the primary airframe.</span>
+            <span data-l="de">Entwicklung eines stoßdämpfenden PETG-Fahrwerksystems, Durchführung theoretischer Aufprallberechnungen und ANSYS Explicit Dynamics Falltest-Simulationen (20 m freier Fall), um ein kontrolliertes Nachgeben bei schweren Stößen sicherzustellen und die primäre Flugzeugzelle zu schützen.</span>
+          </li>
+          <li>
+            <span data-l="en" class="on">Manufactured components via CNC machining, 3D printing, and carbon-fiber vacuum bagging; evaluated physical flight performance, identifying critical center-of-gravity shifts caused by a 1.5 kg weight increase from protective composite layup reinforcements.</span>
+            <span data-l="de">Herstellung von Komponenten mittels CNC-Bearbeitung, 3D-Druck und Kohlefaser-Vakuum-Bagging; Bewertung der physischen Flugleistung und Identifizierung kritischer Schwerpunktverschiebungen, verursacht durch eine Gewichtszunahme von 1,5 kg durch schützende Faserverbundverstärkungen.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Ashok Leyland -->
+    <div class="exp-pane" id="pane-2">
+      <div class="exp-card">
+        <div class="exp-company">Ashok Leyland, Hosur-I, India</div>
+        <div class="exp-role"><span data-li="en" class="on">Student Intern (HR Department)</span><span data-li="de">Praktikant (Personalabteilung)</span></div>
+        <div class="exp-date" style="background:transparent; border:none; padding:0;">02/12/2019 – 20/12/2019</div>
+        <div style="margin-bottom: 1.5rem; margin-top:0.5rem;">
+          <span onclick="openModal('Ashok Leyland Internship Certificate', 'assets/proof/ashok_leyland.jpg')" class="pub-link interactive"><i class="fa fa-file-alt"></i> <span data-li="en" class="on">View Certificate</span><span data-li="de">Zertifikat ansehen</span></span>
+        </div>
+        <ul class="blist">
+          <li><span data-l="en" class="on">Successfully formulated Standard Operating Procedures (SOP) for new apprentice entrants.</span><span data-l="de">Erfolgreiche Formulierung von Standardarbeitsanweisungen (SOP) für neue Auszubildende.</span></li>
+          <li><span data-l="en" class="on">Stipulated the SOP guidelines by thoroughly analyzing and documenting the detailed assembly procedures for H-series and P15-series engines.</span><span data-l="de">Festlegung der SOP-Richtlinien durch detaillierte Analyse und Dokumentation der Montageverfahren für Motoren der H- und P15-Serie.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Short-Term Internships -->
+    <div class="exp-pane" id="pane-3">
+      <div class="exp-card">
+        <div class="exp-company">Short-Term Internships & Vocational Training</div>
+        <div class="exp-role"><span data-li="en" class="on">Technical Trainee</span><span data-li="de">Technischer Auszubildender</span></div>
+        <ul class="blist" style="margin-top:1.5rem;">
+          <li><span data-l="en" class="on"><strong>Western Thomson (India) Limited (17/06/2019 – 28/06/2019):</strong> Underwent specialized internship training focused on assembly and testing environments. Enabled key validation steps for later thermostatic wax research projects.</span><span data-l="de"><strong>Western Thomson (India) Limited (17.06.2019 – 28.06.2019):</strong> Absolvierte ein spezialisiertes Praktikum mit Fokus auf Montage- und Testumgebungen. Ermöglichte wichtige Validierungsschritte für spätere thermostatische Wachsforschungsprojekte.</span></li>
+          <li><span data-l="en" class="on"><strong>Integral Coach Factory (ICF) (29.05.2019 – 04.06.2019):</strong> Completed an intensive industrial in-plant training program covering passenger vehicle manufacturing frameworks under the Ministry of Railways.</span><span data-l="de"><strong>Integral Coach Factory (ICF) (29.05.2019 – 04.06.2019):</strong> Absolvierte ein intensives industrielles Inplant-Training über Fertigungsstrukturen für Personenfahrzeuge unter dem Eisenbahnministerium.</span></li>
+          <li><span data-l="en" class="on"><strong>Goodwin Motors (20.05.2019 – 25.05.2019):</strong> Successfully completed a non-stipendiary vocational training block focusing heavily on hands-on practical training for cars, engines, Bosch FI, starter motors, alternators, and engine diagnostic systems.</span><span data-l="de"><strong>Goodwin Motors (20.05.2019 – 25.05.2019):</strong> Erfolgreicher Abschluss eines unbezahlten Berufstrainings mit starkem Fokus auf praktisches Training für Autos, Motoren, Bosch FI, Startermotoren, Lichtmaschinen und Motordiagnosesysteme.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROJECTS ═══════════ -->
+<section id="projects" class="bg-alt">
+  <div class="si">
+    <p class="s-label reveal"><span data-li="en" class="on">Innovation Portfolio</span><span data-li="de">Innovationsportfolio</span></p>
+    <h2 class="s-title reveal"><span data-li="en" class="on">Featured Projects</span><span data-li="de">Ausgewählte Projekte</span></h2>
+    
+    <div class="proj-grid">
+      
+      <!-- PANN (Full Width Detailed View) -->
+      <div class="p-card reveal" style="grid-column: 1 / -1;">
+        <div class="p-badge">
+          <span data-li="en" class="on">May 2026 – Present</span><span data-li="de">Mai 2026 – Heute</span>
+        </div>
+        <div class="p-title" style="font-size: 1.25rem;"><span data-l="en" class="on">Physics-Informed AI for Multiscale Solid Mechanics</span><span data-l="de">Physik-informierte KI für mehrskalige Festkörpermechanik</span></div>
+        
+        <div style="font-size: .9rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
+          <span data-l="en" class="on"><strong>Project Overview:</strong> Engineered a highly optimized, multiscale computational mechanics pipeline bridging PyTorch and NGSolve. The project decouples the computational bottleneck of concurrent finite element simulations by training a parameterized Input-Convex Neural Network (pICNN) on homogenized microstructural data, and deploying it as a custom Material Routine (UMAT) within a macroscopic Newton-Raphson solver.<br/><br/>
+          <strong>Core Tech Stack:</strong> Python 3.10, PyTorch (Autograd, Sobolev Training), NGSolve/Netgen (C++ FEA Backend, CSG Meshing), SciPy (Voigt Mapping), NumPy.<br/><br/>
+          <strong>The Engineering Challenge:</strong> Simulating composite materials (PDMS matrix with rigid glass beads: μ ≈ 2 MPa vs. E ≈ 70,000 MPa) presents an extreme microstructural stiffness contrast, leading to highly non-linear macroscopic hyperelasticity. Standard FE² concurrent simulations create a mathematically prohibitive time complexity of O(N_macro × N_micro).</span>
+          
+          <span data-l="de"><strong>Projektübersicht:</strong> Entwicklung einer hochoptimierten, mehrskaligen computergestützten Mechanik-Pipeline, die PyTorch und NGSolve verbindet. Das Projekt entkoppelt den Rechenengpass gleichzeitiger Finite-Elemente-Simulationen durch das Training eines parametrisierten Input-Convex Neural Network (pICNN) auf homogenisierten Mikrostrukturdaten und dessen Einsatz als benutzerdefinierte Materialroutine (UMAT) innerhalb eines makroskopischen Newton-Raphson-Lösers.<br/><br/>
+          <strong>Technologie-Stack:</strong> Python 3.10, PyTorch (Autograd, Sobolev Training), NGSolve/Netgen (C++ FEA Backend, CSG Meshing), SciPy (Voigt Mapping), NumPy.<br/><br/>
+          <strong>Herausforderung:</strong> Die Simulation von Verbundwerkstoffen (PDMS-Matrix mit starren Glaskugeln: μ ≈ 2 MPa vs. E ≈ 70.000 MPa) weist extreme mikrostrukturelle Steifigkeitskontraste auf, was zu hochgradig nichtlinearer makroskopischer Hyperelastizität und einem extrem hohen Rechenaufwand führt. O(N_macro × N_micro).</span>
+        </div>
+
+        <div style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.8rem; font-family:'Space Grotesk',sans-serif;">
+            <span data-l="en" class="on">The Architecture & Solution</span><span data-l="de">Die Architektur & Lösung</span>
+        </div>
+        <ul class="blist">
+          <li><span data-l="en" class="on"><strong>Automated RVE Generation & Offline Homogenization:</strong> Scripted Netgen's CSG module to generate Representative Volume Elements (RVEs) containing multiple, randomly dispersed, non-overlapping spherical domains. Applied strict Periodic Boundary Conditions (PBCs) utilizing NGSolve’s native periodic spaces so that local deformation is driven by the macroscopic tensor plus the fluctuation gradient: <b>F</b> = <b>F̄</b> + ∇w̃. Extracted macroscopically homogenized tuples of Deformation (<b>F̄</b>), Stress (<b>P̄</b>), and Tangent Stiffness (<b>Ā</b>) via Hill-Mandel integration across varying volume fractions.</span>
+          <span data-l="de"><strong>Automatisierte RVE-Generierung & Offline-Homogenisierung:</strong> Skripting von Netgens CSG-Modul zur Generierung von RVEs. Anwendung strenger periodischer Randbedingungen (PBCs), sodass die lokale Verformung durch den makroskopischen Tensor plus Fluktuationsgradienten gesteuert wird: <b>F</b> = <b>F̄</b> + ∇w̃. Extraktion makroskopisch homogenisierter Tupel von Verformung (<b>F̄</b>), Spannung (<b>P̄</b>) und Tangentensteifigkeit (<b>Ā</b>) mittels Hill-Mandel-Integration.</span></li>
+          
+          <li><span data-l="en" class="on"><strong>The Polyconvex pICNN Surrogate:</strong> Built a custom PyTorch architecture restricting prediction to a single scalar value: the Strain Energy Density (Ψ). The 1st Piola-Kirchhoff stress and the 4th-order tangent stiffness are extracted analytically as exact derivatives via <code>torch.autograd.grad</code>, mathematically guaranteeing energy conservation and major symmetry. Passed kinematic invariants (I₁, I₂) through softplus-constrained hidden layers to keep weights strictly non-negative, ensuring a polyconvex energy landscape and solver stability. Optimized via combined Sobolev loss functions.</span>
+          <span data-l="de"><strong>Polykonvexes pICNN-Ersatzmodell:</strong> Benutzerdefinierte PyTorch-Architektur, die Vorhersagen auf die Formänderungsenergiedichte (Ψ) beschränkt. Die Spannung und Tangentensteifigkeit werden analytisch als exakte Ableitungen über <code>torch.autograd.grad</code> extrahiert, was Energieerhaltung garantiert. Kinematische Invarianten (I₁, I₂) werden durch Softplus-Beschränkungen geleitet, um Polykonvexität und Solver-Stabilität sicherzustellen.</span></li>
+          
+          <li><span data-l="en" class="on"><strong>Monolithic UMAT Solver Bridge:</strong> Engineered a custom macroscopic Newton-Raphson update loop in Python. During global assembly, local integration point tensors map directly into in-memory <code>torch.Tensor</code> objects, bypassing disk I/O bottlenecks. The exact 3 × 3 ×
